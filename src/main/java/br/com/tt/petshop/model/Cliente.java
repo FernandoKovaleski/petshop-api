@@ -21,15 +21,19 @@ public class Cliente {
     @Column(name = "telefone")
     private String telefone;
 
+    @Column(name = "cpf")
+    private String cpf;
+
     //O JPA/Hibernate usa esse contrutor!!!
     Cliente(){
     }
 
-    public Cliente(Long id, String nome, LocalDate nascimento, String telefone) {
+    public Cliente(Long id, String nome, LocalDate nascimento, String telefone, String cpf) {
         this.id = id;
         this.nome = nome;
         this.nascimento = nascimento;
         this.telefone = telefone;
+        this.cpf = cpf;
     }
 
     public Long getId() {
@@ -46,5 +50,9 @@ public class Cliente {
 
     public String getTelefone() {
         return telefone;
+    }
+
+    public String getCpf() {
+        return cpf;
     }
 }
