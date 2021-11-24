@@ -6,9 +6,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-@Transactional(readOnly = true)
 public interface ProdutoRepository extends JpaRepository<Produto, Long> {
 
     Produto findByNome(String nome);
+
     List<Produto> findByNomeContaining(String nome);
 }
