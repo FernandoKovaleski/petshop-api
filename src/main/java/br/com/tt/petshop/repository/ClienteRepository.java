@@ -2,9 +2,11 @@ package br.com.tt.petshop.repository;
 
 import br.com.tt.petshop.model.Cliente;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 //@Repository - Não precisa colocar quando estender
 //  uma interface do Spring Data!
@@ -28,4 +30,13 @@ public interface ClienteRepository
     Cliente findByNomeEndingWith(String nome);
 
     List<Cliente> findByNascimentoBetween(LocalDate ini, LocalDate fim);
+
+    // JPQL - validado em tempo de startup igual ao query method
+    @Query("select cli from Cliente cli where cli.cpf = :cpf and cli.telefone is not null ")
+    Optional<Cliente> buscarPorCpfComTelefoneNaoNulo(String cpf);
+
+    //SQL - o SPring não valida em tempo de startup
+    @Query(nativeQuery = true,
+            value = "select id,nome,cpf,nascimento, nro_telefone as telefone from tb_cliente cli where cli.cpf = :cpf and cli.nro_telefone is null ")
+    Cliente buscarPorCpfComTelefoneNulo(String cpf);
 }

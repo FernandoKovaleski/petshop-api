@@ -27,11 +27,11 @@ public class ClienteRepositoryTest {
 
     @Test
     void deveRetornarClienteFulano(){
-        em.persist(new Cliente(null, "Fulano", LocalDate.now(), "51 99999999", "751.904.090-90"));
+        em.persist(new Cliente(null, "Enzo", LocalDate.parse("2019-03-04"), "51 888-888", "631.975.590-37"));
 
         List<Cliente> clientes = clienteRepository.findAll();
         Assertions.assertEquals(1, clientes.size());
-        Assertions.assertEquals("Fulano", clientes.get(0).getNome());
+        assertClienteEnzo(clientes.get(0));
     }
 
     @Test
@@ -39,11 +39,39 @@ public class ClienteRepositoryTest {
         em.persist(new Cliente(null, "Theo", LocalDate.parse("2020-01-03"), "51 99999999", "751.904.090-90"));
         em.persist(new Cliente(null, "Enzo", LocalDate.parse("2019-03-04"), "51 888-888", "631.975.590-37"));
 
-        Cliente cliente = clienteRepository.findByCpf("631.975.590-37");
-        Assertions.assertEquals("Enzo", cliente.getNome());
-        Assertions.assertEquals("51 888-888", cliente.getTelefone());
-        Assertions.assertEquals("631.975.590-37", cliente.getCpf());
-        Assertions.assertEquals(LocalDate.parse("2019-03-04"), cliente.getNascimento());
+        Cliente clientePorCpf = clienteRepository.findByCpf("631.975.590-37");
+        Assertions.assertEquals("51 888-888", clientePorCpf.getTelefone());
+        assertClienteEnzo(clientePorCpf);
+    }
+
+    @Test
+    void deveRetornarPorCpfComJpql(){
+        em.persist(new Cliente(null, "Theo", LocalDate.parse("2020-01-03"), "51 99999999", "751.904.090-90"));
+        em.persist(new Cliente(null, "Enzo", LocalDate.parse("2019-03-04"), "51 888-888", "631.975.590-37"));
+
+        Cliente clientePorCpf = clienteRepository
+                .buscarPorCpfComTelefoneNaoNulo("631.975.590-37")
+                .orElseThrow(() -> new RuntimeException("Não retornou o Enzo buscando pelo CPF"));
+
+        Assertions.assertEquals("51 888-888", clientePorCpf.getTelefone());
+        assertClienteEnzo(clientePorCpf);
+    }
+
+    @Test
+    void deveBuscarPorCpfComTelefoneNulo(){
+        em.persist(new Cliente(null, "Theo", LocalDate.parse("2020-01-03"), "51 99999999", "751.904.090-90"));
+        em.persist(new Cliente(null, "Enzo", LocalDate.parse("2019-03-04"), null, "631.975.590-37"));
+
+        Cliente clienteSemTelefone = clienteRepository.buscarPorCpfComTelefoneNulo("631.975.590-37");
+        Assertions.assertNull(clienteSemTelefone.getTelefone());
+        assertClienteEnzo(clienteSemTelefone);
+    }
+
+    private void assertClienteEnzo(Cliente enzo){
+        Assertions.assertEquals("Enzo", enzo.getNome());
+        Assertions.assertEquals("631.975.590-37", enzo.getCpf());
+        Assertions.assertEquals(LocalDate.parse("2019-03-04"), enzo.getNascimento());
+
     }
 
 }
