@@ -14,3 +14,11 @@ Exercício de JPQL:
 Exercício de SQL:
 - Listar todos os produtos ativos ordenando por preço
 - contar a quantidade de produtos inativos
+
+Agendamentos:
+
+- Criar nova entidade Agendamento com os seguintes atributos (id, dataHoraInicio, dataHoraFim, observações)
+- Criar Repositório com as seguintes consultas (uma utilizando QueryMethod, outra jpql e outra sql):
+  - Buscar agendamentos do dia.
+  - Buscar agendamentos dos próximos 7 dias.
+  - Buscar agendamento por ID.
