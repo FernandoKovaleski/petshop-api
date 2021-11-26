@@ -67,11 +67,34 @@ public class ClienteRepositoryTest {
         assertClienteEnzo(clienteSemTelefone);
     }
 
+    @Test
+    void deveContarClientes() {
+        em.persist(new Cliente(null, "Theo", LocalDate.parse("2020-01-03"), "51 99999999", "751.904.090-90"));
+        em.persist(new Cliente(null, "Enzo", LocalDate.parse("2019-03-04"), null, "631.975.590-37"));
+
+        long quantidade = clienteRepository.quantidadeDeClientes();
+
+        Assertions.assertEquals(2, quantidade);
+    }
+
+    @Test
+    void deveRetornarOsPrimeiros3PorNome(){
+        em.persist(new Cliente(null, "Theo", LocalDate.parse("2020-01-03"), null, "751.104.090-90"));
+        em.persist(new Cliente(null, "Enzo", LocalDate.parse("2019-03-05"), null, "631.275.590-37"));
+        em.persist(new Cliente(null, "João", LocalDate.parse("2020-01-06"), null, "751.304.090-90"));
+        em.persist(new Cliente(null, "Fábio", LocalDate.parse("2019-03-07"), null, "631.475.590-37"));
+        em.persist(new Cliente(null, "Giba", LocalDate.parse("2020-01-08"), null, "751.504.090-90"));
+        em.persist(new Cliente(null, "Antonio", LocalDate.parse("2019-03-09"), null, "631.675.590-37"));
+
+        Cliente cliente = clienteRepository.findFirstByOrderByNomeAsc();
+
+        Assertions.assertEquals("Antonio", cliente.getNome());
+    }
+
     private void assertClienteEnzo(Cliente enzo){
         Assertions.assertEquals("Enzo", enzo.getNome());
         Assertions.assertEquals("631.975.590-37", enzo.getCpf());
         Assertions.assertEquals(LocalDate.parse("2019-03-04"), enzo.getNascimento());
-
     }
 
 }

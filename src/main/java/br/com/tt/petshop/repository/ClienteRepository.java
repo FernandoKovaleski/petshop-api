@@ -39,4 +39,9 @@ public interface ClienteRepository
     @Query(nativeQuery = true,
             value = "select id,nome,cpf,nascimento, nro_telefone as telefone from tb_cliente cli where cli.cpf = :cpf and cli.nro_telefone is null ")
     Cliente buscarPorCpfComTelefoneNulo(String cpf);
+
+    @Query(nativeQuery = true, value = "select count(id) from tb_cliente")
+    long quantidadeDeClientes();
+
+    Cliente findFirstByOrderByNomeAsc();
 }
