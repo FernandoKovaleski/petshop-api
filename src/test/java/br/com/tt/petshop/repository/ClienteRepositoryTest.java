@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
+import org.springframework.test.context.jdbc.Sql;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -78,13 +79,15 @@ public class ClienteRepositoryTest {
     }
 
     @Test
+    @Sql("classpath:inserir_clientes.sql")
+    //@Sql(value = "classpath:limpar_banco.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     void deveRetornarOsPrimeiros3PorNome(){
-        em.persist(new Cliente(null, "Theo", LocalDate.parse("2020-01-03"), null, "751.104.090-90"));
-        em.persist(new Cliente(null, "Enzo", LocalDate.parse("2019-03-05"), null, "631.275.590-37"));
-        em.persist(new Cliente(null, "João", LocalDate.parse("2020-01-06"), null, "751.304.090-90"));
-        em.persist(new Cliente(null, "Fábio", LocalDate.parse("2019-03-07"), null, "631.475.590-37"));
-        em.persist(new Cliente(null, "Giba", LocalDate.parse("2020-01-08"), null, "751.504.090-90"));
-        em.persist(new Cliente(null, "Antonio", LocalDate.parse("2019-03-09"), null, "631.675.590-37"));
+//        em.persist(new Cliente(null, "Theo", LocalDate.parse("2020-01-03"), null, "751.104.090-90"));
+//        em.persist(new Cliente(null, "Enzo", LocalDate.parse("2019-03-05"), null, "631.275.590-37"));
+//        em.persist(new Cliente(null, "João", LocalDate.parse("2020-01-06"), null, "751.304.090-90"));
+//        em.persist(new Cliente(null, "Fábio", LocalDate.parse("2019-03-07"), null, "631.475.590-37"));
+//        em.persist(new Cliente(null, "Giba", LocalDate.parse("2020-01-08"), null, "751.504.090-90"));
+//        em.persist(new Cliente(null, "Antonio", LocalDate.parse("2019-03-09"), null, "631.675.590-37"));
 
         Cliente cliente = clienteRepository.findFirstByOrderByNomeAsc();
 

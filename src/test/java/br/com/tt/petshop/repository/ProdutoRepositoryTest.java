@@ -1,6 +1,7 @@
 package br.com.tt.petshop.repository;
 
 import br.com.tt.petshop.model.Produto;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,6 +56,23 @@ public class ProdutoRepositoryTest {
         List<Produto> produtos = produtoRepository.findByNomeContaining("Ração");
         assertEquals(1, produtos.size());
         assertEquals("Ração Animais Pequenos", produtos.get(0).getNome());
+    }
+
+    @Test
+    void deveBuscarAtivosPorNome(){
+        em.persist(criaProdutoRacaoInativo());
+
+        List<Produto> produtos =
+                produtoRepository.listarProdutosAtivosPorNome("Ração Animais Pequenos");
+
+        assertEquals(1, produtos.size(), "A lista deveria ter 1 elemento");
+        assertEquals("Ração Animais Pequenos", produtos.get(0).getNome());
+        assertEquals(BigDecimal.valueOf(25.67), produtos.get(0).getValor());
+        assertTrue(produtos.get(0).isAtivo());
+    }
+
+    private Produto criaProdutoRacaoInativo() {
+        return new Produto(null, "Ração Animais Pequenos", BigDecimal.valueOf(100), false);
     }
 
     private Produto criaProdutoShampooo() {
