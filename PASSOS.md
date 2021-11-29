@@ -22,3 +22,8 @@ Agendamentos:
   - Buscar agendamentos do dia.
   - Buscar agendamentos dos próximos 7 dias.
   - Buscar agendamento por ID.
+
+Escolha sua estratégia:
+- deixar as datas no Java, e passa duas datas (between) pro SQL.
+  - direto no SQL usando funções do SQL como o CURRENT_DATE()
+    - select * from tabela where nascimento between CURRENT_DATE()-7 and CURRENT_DATE()

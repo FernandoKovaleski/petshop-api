@@ -71,6 +71,32 @@ public class ProdutoRepositoryTest {
         assertTrue(produtos.get(0).isAtivo());
     }
 
+    @Test
+    void deveBuscarProdutosAtivosPorPreco(){
+        em.persist(criaProdutoRacaoInativo());
+        em.persist(criaProdutoAntiPulgas());
+
+        List<Produto> produtos = produtoRepository.listarProdutosAtivosPorPreco();
+
+        assertEquals(3, produtos.size());
+        assertEquals("Pó Anti Pulgas", produtos.get(0).getNome());
+        assertEquals("Shampoo Cão Feliz", produtos.get(1).getNome());
+        assertEquals("Ração Animais Pequenos", produtos.get(2).getNome());
+    }
+
+    @Test
+    void deveContarProdutosInativos(){
+        em.persist(criaProdutoRacaoInativo());
+
+        long contador = produtoRepository.contarProdutosInativos();
+
+        assertEquals(1, contador);
+    }
+
+    private Produto criaProdutoAntiPulgas() {
+        return new Produto(null, "Pó Anti Pulgas", BigDecimal.valueOf(12.70), true);
+    }
+
     private Produto criaProdutoRacaoInativo() {
         return new Produto(null, "Ração Animais Pequenos", BigDecimal.valueOf(100), false);
     }

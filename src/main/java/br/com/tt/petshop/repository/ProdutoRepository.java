@@ -19,4 +19,11 @@ public interface ProdutoRepository extends JpaRepository<Produto, Long> {
     @Query("select pro from Produto pro where pro.ativo = true AND pro.nome = :nome ")
     List<Produto> listarProdutosAtivosPorNome(@Param("nome") String nome);
 
+    @Query( value = "select * from tb_produto where ativo = true order by valor asc",
+            nativeQuery = true)
+    List<Produto> listarProdutosAtivosPorPreco();
+
+    @Query( value = "select count(id) from tb_produto where ativo = false",
+            nativeQuery = true)
+    long contarProdutosInativos();
 }
