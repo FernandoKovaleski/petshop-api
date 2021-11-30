@@ -21,7 +21,7 @@ public class ClienteServiceTest {
 
     //@Autowired //NÃO EXISTE AUTOWIRED, Pois é SPRING, e não temos SPRING em teste de service
     @InjectMocks // dá NEW nessa classe e injeta os mocks (dependências)
-    private ClienteService clienteService;
+    ClienteService clienteService;
 
     @Mock //Cria uma "simulação" da dependência
     ClienteRepository clienteRepository;

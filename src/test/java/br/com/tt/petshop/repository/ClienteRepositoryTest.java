@@ -15,10 +15,10 @@ import java.util.List;
 public class ClienteRepositoryTest {
 
     @Autowired //No lugar do construtor, somente em TESTES!
-    private ClienteRepository clienteRepository;
+    ClienteRepository clienteRepository;
 
     @Autowired
-    private TestEntityManager em;
+    TestEntityManager em;
 
     @Test
     void deveRetornarListaVazia(){

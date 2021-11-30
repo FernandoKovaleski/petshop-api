@@ -1,7 +1,6 @@
 package br.com.tt.petshop.repository;
 
 import br.com.tt.petshop.model.Produto;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,10 +17,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class ProdutoRepositoryTest {
 
     @Autowired
-    private ProdutoRepository produtoRepository;
+    ProdutoRepository produtoRepository;
 
     @Autowired
-    private TestEntityManager em;
+    TestEntityManager em;
 
     @BeforeEach
     void configuraMassa(){
