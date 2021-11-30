@@ -28,11 +28,13 @@ public class ClienteServiceTest {
 
     @Test
     void deveListarClientes(){
+        //Preparação (Arrange)
         Mockito.when(clienteRepository.findAll()).thenReturn(List.of(ClienteMock.theo()));
 
-        //Ação! Act
+        //Ação! (Act)
         List<ClienteListagem> dtos = clienteService.listarClientes();
 
+        //Verificações (Assert)
         Assertions.assertEquals(1, dtos.size());
         ClienteListagem cliente = dtos.get(0);
         Assertions.assertEquals(1L, cliente.getId());
