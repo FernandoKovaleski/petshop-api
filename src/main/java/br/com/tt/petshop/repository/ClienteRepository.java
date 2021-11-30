@@ -3,6 +3,7 @@ package br.com.tt.petshop.repository;
 import br.com.tt.petshop.model.Cliente;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -33,12 +34,12 @@ public interface ClienteRepository
 
     // JPQL - validado em tempo de startup igual ao query method
     @Query("select cli from Cliente cli where cli.cpf = :cpf and cli.telefone is not null ")
-    Optional<Cliente> buscarPorCpfComTelefoneNaoNulo(String cpf);
+    Optional<Cliente> buscarPorCpfComTelefoneNaoNulo(@Param("cpf") String cpf);
 
     //SQL - o SPring não valida em tempo de startup
     @Query(nativeQuery = true,
             value = "select id,nome,cpf,nascimento, nro_telefone as telefone from tb_cliente cli where cli.cpf = :cpf and cli.nro_telefone is null ")
-    Cliente buscarPorCpfComTelefoneNulo(String cpf);
+    Cliente buscarPorCpfComTelefoneNulo(@Param("cpf") String cpf);
 
     @Query(nativeQuery = true, value = "select count(id) from tb_cliente")
     long quantidadeDeClientes();
