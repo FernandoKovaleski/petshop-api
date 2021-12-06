@@ -19,6 +19,7 @@ public interface ClienteRepository
     List<Cliente> findDistinctByCpfOrTelefoneOrderById(String cpf, String telefone);
 
     Cliente findByCpf(String cpf);
+
     Cliente findByCpfAndTelefoneIsNotNull(String cpf);
 
     //Select * from tb_cliente where nome like '%n%'

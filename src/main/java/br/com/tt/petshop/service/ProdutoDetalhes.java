@@ -1,15 +1,14 @@
-package br.com.tt.petshop.dto;
+package br.com.tt.petshop.service;
 
 import java.math.BigDecimal;
 
-public class ProdutoListagem {
-
+public class ProdutoDetalhes {
     private final Long id;
     private final String nome;
     private final BigDecimal valor;
     private final Boolean ativo;
 
-    public ProdutoListagem(Long id, String nome, BigDecimal valor, Boolean ativo) {
+    public ProdutoDetalhes(Long id, String nome, BigDecimal valor, Boolean ativo) {
         this.id = id;
         this.nome = nome;
         this.valor = valor;
@@ -28,8 +27,7 @@ public class ProdutoListagem {
         return valor;
     }
 
-    public Boolean isAtivo() {
-
+    public Boolean getAtivo() {
         return ativo;
     }
 }

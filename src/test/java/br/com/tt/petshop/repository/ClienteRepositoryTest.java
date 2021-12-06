@@ -80,7 +80,7 @@ public class ClienteRepositoryTest {
 
     @Test
     @Sql("classpath:inserir_clientes.sql")
-    //@Sql(value = "classpath:limpar_banco.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
+        //@Sql(value = "classpath:limpar_banco.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     void deveRetornarOsPrimeiros3PorNome(){
 //        em.persist(new Cliente(null, "Theo", LocalDate.parse("2020-01-03"), null, "751.104.090-90"));
 //        em.persist(new Cliente(null, "Enzo", LocalDate.parse("2019-03-05"), null, "631.275.590-37"));
