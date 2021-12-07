@@ -1,5 +1,6 @@
 package br.com.tt.petshop.dto;
 
+import java.beans.ConstructorProperties;
 import java.math.BigDecimal;
 
 public class ProdutoListagem {
@@ -9,6 +10,7 @@ public class ProdutoListagem {
     private final BigDecimal valor;
     private final Boolean ativo;
 
+    @ConstructorProperties({"id", "nome", "valor", "ativo"})
     public ProdutoListagem(Long id, String nome, BigDecimal valor, Boolean ativo) {
         this.id = id;
         this.nome = nome;

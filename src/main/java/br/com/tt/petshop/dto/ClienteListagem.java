@@ -6,6 +6,7 @@ public class ClienteListagem {
     private final String nome;
     private final String cpf;
 
+
     public ClienteListagem(Long id, String nome, String cpf) {
         this.id = id;
         this.nome = nome;

@@ -1,6 +1,6 @@
 package br.com.tt.petshop.service;
 
-import br.com.tt.petshop.factory.ClienteFactory;
+import br.com.tt.petshop.dto.ProdutoDetalhes;
 import br.com.tt.petshop.factory.ProdutoFactory;
 import br.com.tt.petshop.repository.ProdutoRepository;
 import org.springframework.stereotype.Service;
@@ -14,10 +14,9 @@ public class ProdutoService {
         this.produtoRepository = produtoRepository;
     }
 
-    public ProdutoDetalhes buscarPorId (Long id){
-
+    public ProdutoDetalhes buscarPorId(Long id) {
         return produtoRepository.findById(id)
-                .map(ProdutoFactory::criarProdutoDetalhes)
-                .orElseThrow(()-> new RuntimeException ("o produto não existe"));
+                .map(ProdutoFactory::criaProdutoDetalhes)
+                .orElseThrow(() -> new RuntimeException("Não existe produto com esse ID!"));
     }
 }
