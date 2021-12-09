@@ -1,6 +1,6 @@
 package br.com.tt.petshop.service;
 
-
+import br.com.tt.petshop.dto.ClienteDetalhes;
 import br.com.tt.petshop.dto.ClienteListagem;
 import br.com.tt.petshop.repository.ClienteRepository;
 import mock.ClienteMock;
@@ -34,7 +34,7 @@ public class ClienteServiceTest {
         when(clienteRepository.findAll()).thenReturn(List.of(ClienteMock.theo()));
 
         //Ação! (Act)
-        List<ClienteListagem> dtos = clienteService.listarClientes();
+        List<ClienteListagem> dtos = clienteService.listarClientes(null);
 
         //Verificações (Assert)
         assertEquals(1, dtos.size());

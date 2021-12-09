@@ -1,5 +1,6 @@
 package br.com.tt.petshop.service;
 
+import br.com.tt.petshop.dto.ProdutoDetalhes;
 import br.com.tt.petshop.model.Produto;
 import br.com.tt.petshop.repository.ProdutoRepository;
 import org.junit.jupiter.api.Test;
@@ -33,7 +34,7 @@ class ProdutoServiceTest {
         assertEquals(1L, produto.getId());
         assertEquals("Shampoo Cão Pequeno", produto.getNome());
         assertEquals(BigDecimal.valueOf(16.5), produto.getValor());
-        assertTrue(produto.getAtivo());
+        assertTrue(produto.isAtivo());
     }
 
     @Test
