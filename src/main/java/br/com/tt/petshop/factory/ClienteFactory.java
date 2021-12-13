@@ -7,12 +7,16 @@ import br.com.tt.petshop.model.Cliente;
 
 public class ClienteFactory {
 
-    public static ClienteListagem criarClienteListagem(Cliente cliente) {
-        return new ClienteListagem(cliente.getId(), cliente.getNome(), cliente.getCpf());
+    public static ClienteListagem criarClienteListagem(Cliente cliente){
+        return new ClienteListagem(cliente.getId(),
+                cliente.getNome(),
+                cliente.getCpf());
     }
 
-    public static ClienteDetalhes criarClienteDetalhes(Cliente cliente) {
-        return new ClienteDetalhes(cliente.getId(), cliente.getNome(), cliente.getCpf(), cliente.getTelefone(),
+    public static ClienteDetalhes criarClienteDetalhes(Cliente cliente){
+        return new ClienteDetalhes(cliente.getId(),
+                cliente.getNome(), cliente.getCpf(),
+                cliente.getTelefone(),
                 cliente.getNascimento());
     }
 

@@ -23,13 +23,13 @@ public class ProdutoRepositoryTest {
     TestEntityManager em;
 
     @BeforeEach
-    void configuraMassa() {
+    void configuraMassa(){
         em.persist(criarProdutoRacao());
         em.persist(criaProdutoShampooo());
     }
 
     @Test
-    void deveRetornarTodos() {
+    void deveRetornarTodos(){
         List<Produto> produtos = produtoRepository.findAll();
         assertEquals(2, produtos.size());
 
@@ -45,20 +45,20 @@ public class ProdutoRepositoryTest {
     }
 
     @Test
-    void deveBuscarPeloNomeShampoo() {
+    void deveBuscarPeloNomeShampoo(){
         Produto produto = produtoRepository.findByNome("Shampoo Cão Feliz");
         assertEquals("Shampoo Cão Feliz", produto.getNome());
     }
 
     @Test
-    void deveFiltrarContendoRacao() {
+    void deveFiltrarContendoRacao(){
         List<Produto> produtos = produtoRepository.findByNomeContaining("Ração");
         assertEquals(1, produtos.size());
         assertEquals("Ração Animais Pequenos", produtos.get(0).getNome());
     }
 
     @Test
-    void deveBuscarAtivosPorNome() {
+    void deveBuscarAtivosPorNome(){
         em.persist(criaProdutoRacaoInativo());
 
         List<Produto> produtos =
@@ -71,7 +71,7 @@ public class ProdutoRepositoryTest {
     }
 
     @Test
-    void deveBuscarProdutosAtivosPorPreco() {
+    void deveBuscarProdutosAtivosPorPreco(){
         em.persist(criaProdutoRacaoInativo());
         em.persist(criaProdutoAntiPulgas());
 
@@ -84,7 +84,7 @@ public class ProdutoRepositoryTest {
     }
 
     @Test
-    void deveContarProdutosInativos() {
+    void deveContarProdutosInativos(){
         em.persist(criaProdutoRacaoInativo());
 
         long contador = produtoRepository.contarProdutosInativos();

@@ -1,5 +1,4 @@
-package br.com.tt.petshop.Controller;
-
+package br.com.tt.petshop.controller;
 
 import br.com.tt.petshop.dto.ClienteAtualizacao;
 import br.com.tt.petshop.dto.ClienteListagem;
@@ -37,9 +36,9 @@ class ClienteControllerTest {
     MockMvc webclient;
 
     /*
-     * @MockBean: Usem só em teste do Spring
-     * Nos demais continue usando só @Mock
-     */
+    * @MockBean: Usem só em teste do Spring
+    * Nos demais continue usando só @Mock
+    */
     @MockBean
     ClienteService clienteService;
 
@@ -52,8 +51,8 @@ class ClienteControllerTest {
     @Test
     void deveRetornarDoisClientes() throws Exception {
         when(clienteService.listarClientes(null)).thenReturn(List.of(
-                new ClienteListagem(1L, "Thor Silva", "755.818.130-51"),
-                new ClienteListagem(2L, "Enzo Santos", "373.866.760-18")));
+                        new ClienteListagem(1L, "Thor Silva", "755.818.130-51"),
+                        new ClienteListagem(2L, "Enzo Santos", "373.866.760-18")));
 
         webclient.perform(get("/clientes"))
                 .andExpect(status().isOk())
@@ -80,32 +79,14 @@ class ClienteControllerTest {
         json.put("nascimento", "2021-12-07");
 
         webclient.perform(post("/clientes")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(json.toString()))
-                .andExpect(status().isCreated())
-                .andExpect(header().stringValues("location", "/clientes/22"));
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(json.toString()))
+        .andExpect(status().isCreated())
+        .andExpect(header().stringValues("location", "/clientes/22"));
     }
 
     @Test
-    /* Formas de criar um JSON:
-
-        //1- JSON FIXO
-        String body = "{\n" +
-                "  \"nome\": \"Gilberto\",\n" +
-                "  \"cpf\": \"8282828282\",\n" +
-                "  \"telefone\": \"51 999999\",\n" +
-                "  \"nascimento\": \"2021-12-07\"\n" +
-                "}";
-
-        //2- OBJECT MAPPER
-        ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.findAndRegisterModules();
-        String body = objectMapper.writeValueAsString(new ClienteCriacao("Gilberto",
-        "8282828282", "51 9999-9999", LocalDate.parse("1991-12-07")));
-
-
-     */
-    void deveAtualizar() throws Exception {
+    void deveAtualizar() throws Exception{
 
         JSONObject json = new JSONObject();
         json.put("nome", "Thor Silva");
@@ -127,7 +108,7 @@ class ClienteControllerTest {
     }
 
     @Test
-    void deveDeletar() throws Exception {
+    void deveDeletar() throws Exception{
 
         webclient.perform(delete("/clientes/{id}", 22))
                 .andExpect(status().isNoContent())

@@ -1,23 +1,23 @@
 package br.com.tt.petshop.dto;
 
-import java.beans.ConstructorProperties;
 import java.math.BigDecimal;
 
 public class ProdutoDetalhes {
-
+    private final Long id;
     private final String nome;
     private final BigDecimal valor;
     private final boolean ativo;
 
-    @ConstructorProperties({"nome", "valor", "ativo"})
-    public ProdutoDetalhes(String nome, BigDecimal valor, boolean ativo) {
-
+    public ProdutoDetalhes(Long id, String nome, BigDecimal valor, boolean ativo) {
+        this.id = id;
         this.nome = nome;
         this.valor = valor;
         this.ativo = ativo;
     }
 
-
+    public Long getId() {
+        return id;
+    }
 
     public String getNome() {
         return nome;

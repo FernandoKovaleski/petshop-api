@@ -1,4 +1,4 @@
-package br.com.tt.petshop.Controller;
+package br.com.tt.petshop.controller;
 
 import br.com.tt.petshop.dto.ClienteAtualizacao;
 import br.com.tt.petshop.dto.ClienteCriacao;
@@ -9,9 +9,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 
+//@Validated // Essa anotação no Controller não deveria ser obrigatória...
 @RestController //(@Controller + @ResponseBody)
 @RequestMapping("/clientes")
 public class ClienteController {
@@ -39,7 +41,7 @@ public class ClienteController {
 
     @PostMapping
     //@ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity criaCliente(@RequestBody ClienteCriacao cliente) {
+    public ResponseEntity criaCliente(@RequestBody @Valid ClienteCriacao cliente) {
         Long idCriado = clienteService.criar(cliente);
         URI location = URI.create("/clientes/" + idCriado);
         return ResponseEntity.created(location).build();
@@ -58,5 +60,4 @@ public class ClienteController {
                           @RequestBody ClienteAtualizacao cliente) {
         clienteService.atualizar(id, cliente);
     }
-
 }

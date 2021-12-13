@@ -25,7 +25,7 @@ class ProdutoServiceTest {
     ProdutoService produtoService;
 
     @Test
-    void deveBuscarPorId() {
+    void deveBuscarPorId(){
         Mockito.when(produtoRepository.findById(1L))
                 .thenReturn(Optional.of(new Produto(1L, "Shampoo Cão Pequeno", BigDecimal.valueOf(16.5), true)));
 
@@ -38,12 +38,12 @@ class ProdutoServiceTest {
     }
 
     @Test
-    void deveFalharAoBuscarIdInexistente() {
+    void deveFalharAoBuscarIdInexistente(){
         Mockito.when(produtoRepository.findById(999L)).thenReturn(Optional.empty());
 
         RuntimeException e = assertThrows(RuntimeException.class,
                 () -> produtoService.buscarPorId(999L));
 
-        assertEquals("Não existe produto com esse ID!", e.getMessage());
+        assertEquals("Não existe produto com esse ID!",e.getMessage());
     }
 }
