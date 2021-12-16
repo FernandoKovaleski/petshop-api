@@ -1,4 +1,4 @@
-package br.com.tt.petshop.controller;
+package br.com.tt.petshop.Controller;
 
 import br.com.tt.petshop.dto.ClienteAtualizacao;
 import br.com.tt.petshop.dto.ClienteListagem;
@@ -27,7 +27,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@WebMvcTest(controllers = ClienteController.class)
+@WebMvcTest(controllers = br.com.tt.petshop.controller.ClienteController.class)
 class ClienteControllerTest {
 
     static final Logger LOG = LoggerFactory.getLogger(ClienteControllerTest.class);
