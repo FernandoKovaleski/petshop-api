@@ -1,27 +1,31 @@
 package br.com.tt.petshop.service;
 
+import br.com.tt.petshop.client.credito.CreditoApiClient;
+import br.com.tt.petshop.client.credito.SituacaoCliente;
 import br.com.tt.petshop.dto.ClienteAtualizacao;
 import br.com.tt.petshop.dto.ClienteCriacao;
 import br.com.tt.petshop.dto.ClienteDetalhes;
 import br.com.tt.petshop.dto.ClienteListagem;
 import br.com.tt.petshop.exception.NaoExisteException;
+import br.com.tt.petshop.exception.NegocioException;
 import br.com.tt.petshop.factory.ClienteFactory;
 import br.com.tt.petshop.model.Cliente;
 import br.com.tt.petshop.repository.ClienteRepository;
+import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Service
+@AllArgsConstructor
 public class ClienteService {
 
     private final ClienteRepository clienteRepository;
-
-    public ClienteService(ClienteRepository clienteRepository) {
-        this.clienteRepository = clienteRepository;
-    }
+    private final CreditoApiClient creditoApiClient;
 
     public List<ClienteListagem> listarClientes(String nome){
 
@@ -46,6 +50,15 @@ public class ClienteService {
     }
 
     public Long criar(ClienteCriacao clienteCriacao) {
+
+        SituacaoCliente situacao = creditoApiClient.obterSituacaoCredito(clienteCriacao.getCpf());
+
+        log.info("Situação: {}", situacao);
+
+        if(situacao.estaInadimplente()){
+            throw new NegocioException("Usuário possui pendências e não pode ser cadastrado!");
+        }
+
         Cliente cliente = ClienteFactory.criarCliente(clienteCriacao);
         Cliente clienteSalvo = clienteRepository.save(cliente);
         //O Hibernate retorna o objeto cliente salvo com ID

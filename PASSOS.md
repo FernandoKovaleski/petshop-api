@@ -58,3 +58,16 @@ Exercício - Validações:
 - Cada parte do nome da pessoa deve conter ao menos 2 letras.
 - Uma pessoa não pode ser cadastrada com o mesmo CPF de outra já cadastrada.
 - Avaliar outros campos obrigatórios e outras validações com @Anotações
+
+OpenFeign: Vamos fazer um caso de uso COMPLETO:
+
+- Implementar a criação do Animal com os atributos: tipo (CAO, GATO, PASSARO), nome, nascimento, foto (String).
+- Implementar a seguinte regra:
+    - Caso o usuário tente criar um Cão ou Gato, utilizar as APIs externas para obter as fotos.
+    - O usuário não informará a foto, somente o tipo, a foto será aleatória.
+    - Ambas as Apis retornarão a URL da foto, ela que deverá ser salva no banco.
+- Implementar a listagem dos animais com todos os atributos.
+
+APIs EXTERNAS:
+https://random.dog/woof.json
+https://api.thecatapi.com/v1/images/search

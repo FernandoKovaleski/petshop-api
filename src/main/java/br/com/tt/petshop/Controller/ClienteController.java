@@ -5,6 +5,7 @@ import br.com.tt.petshop.dto.ClienteCriacao;
 import br.com.tt.petshop.dto.ClienteDetalhes;
 import br.com.tt.petshop.dto.ClienteListagem;
 import br.com.tt.petshop.service.ClienteService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,9 +14,11 @@ import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 
+@Slf4j // Lombok para logs...
 //@Validated // Essa anotação no Controller não deveria ser obrigatória...
 @RestController //(@Controller + @ResponseBody)
 @RequestMapping("/clientes")
+@CrossOrigin(origins = "*")
 public class ClienteController {
 
     private final ClienteService clienteService;
@@ -42,7 +45,11 @@ public class ClienteController {
     @PostMapping
     //@ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity criaCliente(@RequestBody @Valid ClienteCriacao cliente) {
+
+
+        log.info("Cliente criado: {}", cliente);
         Long idCriado = clienteService.criar(cliente);
+
         URI location = URI.create("/clientes/" + idCriado);
         return ResponseEntity.created(location).build();
     }
