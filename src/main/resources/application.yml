@@ -11,3 +11,5 @@ feign.client.config.default:
 logging.level:
   br.com.tt.petshop.cliente: DEBUG
 
+  client.credito.url: https://imersao-credito-api.herokuapp.com
+
