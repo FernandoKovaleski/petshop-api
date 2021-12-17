@@ -1,4 +1,4 @@
-package br.com.tt.petshop.handler;
+package br.com.tt.petshop.Handler;
 
 import br.com.tt.petshop.dto.InformacoesErro;
 import org.springframework.web.bind.MethodArgumentNotValidException;
