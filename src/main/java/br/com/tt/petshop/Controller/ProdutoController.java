@@ -1,4 +1,4 @@
-package br.com.tt.petshop.controller;
+package br.com.tt.petshop.Controller;
 
 import br.com.tt.petshop.dto.ProdutoAtualizacao;
 import br.com.tt.petshop.dto.ProdutoCriacao;
